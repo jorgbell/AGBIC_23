@@ -24,8 +24,8 @@ MonoBehaviour:
   treeState: 0
   blackboard:
     moveToPosition: {x: 100, y: 0, z: 0}
-  viewPosition: {x: -56, y: 470, z: 0}
-  viewScale: {x: 0.7561437, y: 0.7561437, z: 1}
+  viewPosition: {x: -173, y: 340, z: 0}
+  viewScale: {x: 0.57175326, y: 0.57175326, z: 1}
   references:
     version: 2
     RefIds:
@@ -35,7 +35,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: 08babbf2-251b-4019-9d8e-2f9fc5bc6b8b
-        position: {x: 723.1318, y: -392.096}
+        position: {x: 723, y: -393}
         blackboard:
           moveToPosition: {x: 0, y: 0, z: 0}
         description: Where it all begins!
@@ -48,7 +48,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: dcafe99d707d250419e5d8ff0ada012e
-        position: {x: 723, y: -230.00012}
+        position: {x: 723, y: -229}
         blackboard:
           moveToPosition: {x: 0, y: 0, z: 0}
         description: Repeat forever
@@ -107,7 +107,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: a6398ba3eee6567469a804864807353b
-        position: {x: 463.73767, y: 181}
+        position: {x: 465, y: 181}
         blackboard:
           moveToPosition: {x: 0, y: 0, z: 0}
         description: Wait

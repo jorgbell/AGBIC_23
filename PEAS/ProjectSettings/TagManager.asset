@@ -11,7 +11,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Tilemap
   - 
   - 
   - 
@@ -49,6 +49,9 @@ TagManager:
     locked: 0
   - name: ground
     uniqueID: 1561952497
+    locked: 0
+  - name: objects
+    uniqueID: 3400003365
     locked: 0
   - name: character
     uniqueID: 4110456269
