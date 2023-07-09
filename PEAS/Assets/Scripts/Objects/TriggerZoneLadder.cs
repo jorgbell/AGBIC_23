@@ -29,10 +29,18 @@ public class TriggerZoneLadder : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        SimpleMovement s = collision.GetComponent<SimpleMovement>();
-        if (s!=null)
+
+        Pea p = collision.GetComponent<Pea>();
+        if (p!=null)
         {
-            if(!s.isInLadder) s.EntersLadder(other.position);
+            if(p.GetCollisionType() == ScenarioObjectType.NONE){
+                p.ladderTarget = other.position;
+                p.EntersScenarioObject(ScenarioObjectType.LADDER);
+            }
+        }
+        else
+        {
+            if(collision.GetComponent<ChangeDirection>() == null )Debug.LogError("NOT A PEA");
         }
 
     }

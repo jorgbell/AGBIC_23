@@ -137,7 +137,7 @@ GameObject:
   - component: {fileID: 69641007}
   - component: {fileID: 69641011}
   m_Layer: 0
-  m_Name: Square
+  m_Name: BasicPea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -292,18 +292,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 69641006}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 36ccfd2c086c1f246bc3ae55847dce07, type: 3}
+  m_Script: {fileID: 11500000, guid: b56b4025ab06fa3468353d1eed4c74ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
-  ladderSpeed: 1
+  type: 0
+  points: 5
   movementDirection: {x: 1, y: 0}
-  boxSize: {x: 0.5, y: 0.14, z: 0}
-  maxGroundDistance: 0.25
+  movementSpeed: 5
+  ladderSpeed: 1
+  ladderTarget: {x: 0, y: 0}
+  boxSize: {x: 0.59, y: 0.08, z: 0}
+  maxGroundDistance: 0.24
   groundLayerMask:
     serializedVersion: 2
     m_Bits: 64
-  isInLadder: 0
 --- !u!1 &367779840
 GameObject:
   m_ObjectHideFlags: 0
