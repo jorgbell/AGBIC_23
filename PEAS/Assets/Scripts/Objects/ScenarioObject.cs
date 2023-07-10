@@ -8,6 +8,7 @@ public abstract class ScenarioObject : MonoBehaviour, IScenarioObject
     public bool fixChildrenScale = false;
     [HideInInspector]
     public List<IPea> peasAffectedByThis = new List<IPea>();
+    public List<IPea> peasToRemove = new List<IPea>();
 
     public ScenarioObjectType GetScenarioType() { return type; }
 
@@ -60,7 +61,18 @@ public abstract class ScenarioObject : MonoBehaviour, IScenarioObject
 
     public void DeletePea(IPea pea)
     {
-        peasAffectedByThis.Remove(pea);
+        peasToRemove.Add(pea);
+    }
+    private void Update()
+    {
+        if (peasToRemove.Count > 0)
+        {
+            foreach(IPea p in peasToRemove)
+            {
+                peasAffectedByThis.Remove(p);
+            }
+            peasToRemove.Clear();
+        }
     }
     //------------------NOT IMPLEMENTED HERE
     public abstract void Activate(Pea p);

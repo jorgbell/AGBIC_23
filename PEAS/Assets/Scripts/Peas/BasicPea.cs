@@ -9,7 +9,6 @@ public class BasicPea : Pea
     public override void EntersScenarioObject(ScenarioObject so)
     {
         objectCollision = so;
-        so.AddPea(this);
         switch (so.type)
         {
             case ScenarioObjectType.LADDER:
@@ -125,9 +124,10 @@ public class BasicPea : Pea
     {
         if (GroundCheck())
         {
-            movementDirection = movementDirection.normalized;
-            Vector2 v = movementDirection * movementSpeed;
-            rb.velocity = v;
+            //movementDirection = movementDirection.normalized;
+            //Vector2 v = movementDirection * movementSpeed;
+            //rb.velocity = v;
+            transform.Translate(movementDirection * movementSpeed * Time.deltaTime);
         }
 
     }
