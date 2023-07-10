@@ -6,10 +6,11 @@ using UnityEngine;
 public class BasicPea : Pea
 {
 
-    public override void EntersScenarioObject(ScenarioObjectType st)
+    public override void EntersScenarioObject(ScenarioObject so)
     {
-        objectCollision = st;
-        switch (st)
+        objectCollision = so;
+        so.AddPea(this);
+        switch (so.type)
         {
             case ScenarioObjectType.LADDER:
                 rb.isKinematic = true; rb.velocity = new Vector2(0, 0);
@@ -32,10 +33,11 @@ public class BasicPea : Pea
         }
     }
 
-    public override void ExitsScenarioObject(ScenarioObjectType st)
+    public override void ExitsScenarioObject(ScenarioObject so)
     {
-        objectCollision = ScenarioObjectType.NONE;
-        switch (st)
+        objectCollision = null;
+        so.DeletePea(this);
+        switch (so.type)
         {
             case ScenarioObjectType.LADDER:
                 col.enabled = true; rb.isKinematic = false;
@@ -72,7 +74,7 @@ public class BasicPea : Pea
         if (Vector2.Distance(transform.position, ladderTarget) < 0.001f)
         {
             // Detiene el movimiento
-            ExitsScenarioObject(ScenarioObjectType.LADDER);
+            ExitsScenarioObject(objectCollision);
         }
     }
 
@@ -89,7 +91,12 @@ public class BasicPea : Pea
     /// </summary>
     public override void Walk()
     {
-        switch (objectCollision)
+        if(objectCollision == null)
+        {
+            AutoMovement();
+            return;
+        }
+        switch (objectCollision.type)
         {
             case ScenarioObjectType.LADDER:
                 LadderMovement();

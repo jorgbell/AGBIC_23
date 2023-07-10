@@ -14,7 +14,7 @@ public abstract class Pea : MonoBehaviour, IPea
     public PeaType type;
     public float points;
     private PeaState state;
-    protected ScenarioObjectType objectCollision = ScenarioObjectType.NONE;
+    protected ScenarioObject objectCollision = null;
     //Movement
     public Vector2 movementDirection;
     public float movementSpeed;
@@ -67,7 +67,11 @@ public abstract class Pea : MonoBehaviour, IPea
     }
     public void ChangeState(PeaState s) { state = s; }
     public PeaType GetPeaType() { return type; }
-    public ScenarioObjectType GetCollisionType() { return objectCollision; }
+    public ScenarioObjectType GetCollisionType() {
+        if (objectCollision == null) 
+            return ScenarioObjectType.NONE; 
+        return objectCollision.type; 
+    }
 
     public bool GroundCheck()
     {
@@ -92,8 +96,8 @@ public abstract class Pea : MonoBehaviour, IPea
 
     //---------------------NOT IMPLEMENTED HERE-------------------------------
     public abstract void Walk();
-    public abstract void EntersScenarioObject(ScenarioObjectType st);
-    public abstract void ExitsScenarioObject(ScenarioObjectType st);
+    public abstract void EntersScenarioObject(ScenarioObject st);
+    public abstract void ExitsScenarioObject(ScenarioObject st);
     public abstract void LadderMovement();
     public abstract void ElevatorMovement();
     public abstract void TrampolineMovement();

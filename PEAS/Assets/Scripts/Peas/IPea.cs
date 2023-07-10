@@ -20,8 +20,8 @@ public interface IPea
     public abstract float GetPoints();
     public abstract void Walk();
     public void Die();
-    public abstract void EntersScenarioObject(ScenarioObjectType st);
-    public abstract void ExitsScenarioObject(ScenarioObjectType st);
+    public abstract void EntersScenarioObject(ScenarioObject so);
+    public abstract void ExitsScenarioObject(ScenarioObject so);
     //Movement types: metodos por ahora vacios pero en esencia cada guisante deberá implementar su manera
     //de interactuar con el escenario
     public abstract void LadderMovement();
