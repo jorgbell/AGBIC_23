@@ -4,18 +4,14 @@ using UnityEngine;
 
 public class ChangeDirection : MonoBehaviour
 {
-    IPea thisPea = null;
+    Pea thisPea = null;
     private void Start()
     {
-        thisPea = transform.parent.GetComponent(typeof(IPea)) as IPea;
+        thisPea = transform.parent.GetComponent(typeof(IPea)) as Pea;
     }
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log("Collision detected");
-        if(thisPea != null)
-        {
-            thisPea.ChangeDirection();
-        }
-        else { Debug.LogError("NOT A PEA!!"); }
+        if(!thisPea.isStuck && thisPea.GetCollisionType() == ScenarioObjectType.NONE) thisPea.ChangeDirection();
     }
 }

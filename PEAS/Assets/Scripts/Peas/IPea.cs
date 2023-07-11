@@ -17,6 +17,7 @@ public interface IPea
     public void ChangeDirection();
     public void ChangeState(PeaState s);
     public bool GroundCheck();
+    public bool StuckCheck();
     public abstract float GetPoints();
     public abstract void Walk();
     public void Die();

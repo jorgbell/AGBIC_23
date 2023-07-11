@@ -23,11 +23,13 @@ public abstract class ScenarioObject : MonoBehaviour, IScenarioObject
         transform.position = new Vector3(800, 800, 800);
         transform.localScale = new Vector3(1, 1, 1);
         //en caso de que el guisante este siendo afectado por el objeto de escenario en el momento de eliminarse, se quitan.
-        foreach (IPea p in peasAffectedByThis)
+        foreach (Pea p in peasAffectedByThis)
         {
-            if (p.GetCollisionType() == type) p.ExitsScenarioObject(this);
+            if (p.GetCollisionType() == type) { 
+                p.ExitsScenarioObject(this); 
+                p.checkIfIsStuck = true;
+            }
         }
-
     }
     /// <summary>
     /// Al cambiar la escala del objeto, los hijos del objeto (que contienen el trigger) tambien cambian.

@@ -22,7 +22,6 @@ public class ScenarioObjectSpawner : MonoBehaviour
         {
             case ScenarioObjectType.LADDER:
                 sprRender.sprite = ladderPrefab.GetComponent<SpriteRenderer>().sprite;
-                sprRender.color = ladderPrefab.GetComponent<SpriteRenderer>().color;
                 objectSpawned = Instantiate(ladderPrefab, new Vector3(800, 800, 800), Quaternion.identity);
                 break;
             case ScenarioObjectType.ELEVATOR:

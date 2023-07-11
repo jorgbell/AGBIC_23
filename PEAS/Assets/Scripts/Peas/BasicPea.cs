@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class BasicPea : Pea
 {
-
     public override void EntersScenarioObject(ScenarioObject so)
     {
         objectCollision = so;
@@ -39,8 +38,8 @@ public class BasicPea : Pea
         switch (so.type)
         {
             case ScenarioObjectType.LADDER:
-                col.enabled = true; rb.isKinematic = false;
-                movesInUpdate = false;
+                rb.isKinematic = false;
+                movesInUpdate = true;
                 break;
             case ScenarioObjectType.ELEVATOR:
                 break;
@@ -122,7 +121,7 @@ public class BasicPea : Pea
     }
     public override void AutoMovement()
     {
-        if (GroundCheck())
+        if (isInGround && !isStuck)
         {
             //movementDirection = movementDirection.normalized;
             //Vector2 v = movementDirection * movementSpeed;
