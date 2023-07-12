@@ -17,6 +17,9 @@ public class BasicPea : Pea
             case ScenarioObjectType.ELEVATOR:
                 break;
             case ScenarioObjectType.TRAMPOLINE:
+                rb.velocity = new Vector2(0, 0);
+                hasJumped = false;
+                movesInUpdate = false;
                 break;
             case ScenarioObjectType.DEATHZONE:
                 break;
@@ -43,6 +46,8 @@ public class BasicPea : Pea
             case ScenarioObjectType.ELEVATOR:
                 break;
             case ScenarioObjectType.TRAMPOLINE:
+                hasJumped = false;
+                movesInUpdate = true;
                 break;
             case ScenarioObjectType.DEATHZONE:
                 break;
@@ -59,7 +64,7 @@ public class BasicPea : Pea
 
     public override bool IceMovement()
     {
-        return false;
+        return true;
     }
 
     public override bool LadderMovement()
@@ -71,32 +76,38 @@ public class BasicPea : Pea
         if (Vector2.Distance(transform.position, ladderTarget) < 0.001f)
         {
             // Detiene el movimiento
-            ExitsScenarioObject(objectCollision);
+            return false;
         }
-        return false;
+        return true;
 
     }
 
     public override bool TrampolineMovement()
     {
-        return false;
+        if (!hasJumped) {
+            rb.AddForce(new Vector3(trampolineForceX * myrrorForces, trampolineForceY, 0), ForceMode2D.Impulse); 
+            hasJumped = true; }
+        return base.TrampolineMovement();
     }
 
 
     public override bool AutoMovement()
     {
         if (base.AutoMovement())
+        {
             transform.Translate(movementDirection * movementSpeed * Time.deltaTime);
+            return true;
+        }
         return false;
     }
 
     public override bool CintaMovement()
     {
-        return false;
+        return true;
     }
 
     public override bool ElevatorMovement()
     {
-        return false;
+        return true;
     }
 }

@@ -18,6 +18,7 @@ public abstract class Pea : MonoBehaviour, IPea
 
     //Movement
     public Vector2 movementDirection;
+    protected float myrrorForces;
     public float movementSpeed;
     //Movement Logic
     [HideInInspector]
@@ -37,11 +38,16 @@ public abstract class Pea : MonoBehaviour, IPea
     public float ladderSpeed;
     [HideInInspector]
     public Vector2 ladderTarget;
+    //TRAMPOLINE
+    public float trampolineForceX;
+    public float trampolineForceY;
+    protected bool hasJumped = false;
 
     protected Rigidbody2D rb; protected Collider2D col; protected SpriteRenderer sprrender;
 
     private void Start()
     {
+        myrrorForces = movementDirection.x;
         rb = GetComponent<Rigidbody2D>(); col = GetComponent<Collider2D>(); sprrender = GetComponent<SpriteRenderer>();
 
     }
@@ -72,10 +78,11 @@ public abstract class Pea : MonoBehaviour, IPea
         {
             currentRotation.y += 180;
             q = Quaternion.Euler(currentRotation);
+            myrrorForces *= -1;
         }
         transform.localRotation = q;
     }
-    
+
     public void ChangeState(PeaState s) { state = s; }
     public PeaType GetPeaType() { return type; }
     public ScenarioObjectType GetCollisionType()
@@ -98,38 +105,41 @@ public abstract class Pea : MonoBehaviour, IPea
     /// </summary>
     public void Walk()
     {
+        //casos base
         if (isStuck)
         {
             return;
         }
-
         if (objectCollision == null)
         {
             AutoMovement();
             return;
         }
+        //resto de casos
+        bool result = true;
         switch (objectCollision.type)
         {
             case ScenarioObjectType.LADDER:
-                LadderMovement();
+                result = LadderMovement();
                 break;
             case ScenarioObjectType.ELEVATOR:
-                ElevatorMovement();
+                result = ElevatorMovement();
                 break;
             case ScenarioObjectType.TRAMPOLINE:
-                TrampolineMovement();
+                result = TrampolineMovement();
                 break;
             case ScenarioObjectType.ICE:
-                IceMovement();
+                result = IceMovement();
                 break;
             case ScenarioObjectType.CINTA:
-                CintaMovement();
+                result = CintaMovement();
                 break;
             //---------------------------------default movement
             default:
                 AutoMovement();
                 break;
         }
+        if (!result && objectCollision != null) ExitsScenarioObject(objectCollision);
     }
 
     public virtual void EntersScenarioObject(ScenarioObject st)
@@ -153,10 +163,16 @@ public abstract class Pea : MonoBehaviour, IPea
         if (isInGround) return true;
         return false;
     }
+    public virtual bool TrampolineMovement()
+    {
+        if (isInGround)
+            return false;
+        return true;
+    }
+
     //---------------------NOT IMPLEMENTED HERE-------------------------------
     public abstract bool LadderMovement();
     public abstract bool ElevatorMovement();
-    public abstract bool TrampolineMovement();
     public abstract bool IceMovement();
     public abstract bool CintaMovement();
 

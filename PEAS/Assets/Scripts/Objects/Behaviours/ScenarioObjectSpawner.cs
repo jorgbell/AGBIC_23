@@ -8,6 +8,7 @@ public class ScenarioObjectSpawner : MonoBehaviour
     ScenarioObject objectSpawned = null;
     bool isInPosition = false;
     public Ladder ladderPrefab;
+    public Trampoline trampolinePrefab;
     Collider2D col;
     SpriteRenderer sprRender;
     private void Start()
@@ -28,7 +29,8 @@ public class ScenarioObjectSpawner : MonoBehaviour
                 Debug.LogWarning("ELEVATOR NOT IMPLEMENTED");
                 break;
             case ScenarioObjectType.TRAMPOLINE:
-                Debug.LogWarning("TRAMPOLINE NOT IMPLEMENTED");
+                sprRender.sprite = trampolinePrefab.GetComponent<SpriteRenderer>().sprite;
+                objectSpawned = Instantiate(trampolinePrefab, new Vector3(800, 800, 800), Quaternion.identity);
                 break;
             case ScenarioObjectType.DEATHZONE:
                 Debug.LogWarning("DEATHZONE NOT IMPLEMENTED");
