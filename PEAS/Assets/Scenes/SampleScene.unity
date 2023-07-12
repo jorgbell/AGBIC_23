@@ -4125,6 +4125,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 497804192354311527, guid: ae6e8644b969f2d49be11b3b5b803f83, type: 3}
+      propertyPath: groundLayerMask.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
+    - target: {fileID: 1742504331719256835, guid: ae6e8644b969f2d49be11b3b5b803f83, type: 3}
+      propertyPath: maxWallDistance
+      value: 0.48
+      objectReference: {fileID: 0}
+    - target: {fileID: 1742504331719256835, guid: ae6e8644b969f2d49be11b3b5b803f83, type: 3}
+      propertyPath: maxWallDistanceY
+      value: -0.07
+      objectReference: {fileID: 0}
     - target: {fileID: 1968876747589728661, guid: ae6e8644b969f2d49be11b3b5b803f83, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -4190,7 +4202,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
-    - {fileID: 404075806552110015, guid: ae6e8644b969f2d49be11b3b5b803f83, type: 3}
+    - {fileID: 0}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
