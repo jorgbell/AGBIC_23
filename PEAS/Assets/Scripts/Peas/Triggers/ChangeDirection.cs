@@ -9,6 +9,8 @@ public class ChangeDirection : MonoBehaviour
     public Vector3 wallBoxSize;
     public float maxWallDistance;
     public LayerMask groundLayerMask;
+    public LayerMask peasLayerMask;
+    public bool changesWithPeas = false;
 
     private void Start()
     {
@@ -25,7 +27,8 @@ public class ChangeDirection : MonoBehaviour
             //Debug.Log("CANT CHECK WALL COLLISION");
             return false;
         }
-        if (Physics2D.BoxCast(transform.position, wallBoxSize, 0, transform.right, maxWallDistance, groundLayerMask))
+        if (Physics2D.BoxCast(transform.position, wallBoxSize, 0, transform.right, maxWallDistance, groundLayerMask) ||
+            (changesWithPeas && Physics2D.BoxCast(transform.position, wallBoxSize, 0, transform.right, maxWallDistance, peasLayerMask)))
         {
             //Debug.Log("COLLIDES WITH WALL(TER)");
             thisPea.ChangeDirection();

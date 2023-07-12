@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7960123182352937275}
   - component: {fileID: 5862754699903015999}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: LockCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -59,7 +59,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8363112590953218711}
   - component: {fileID: 5547469937487413841}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ChangeDirection
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74,7 +74,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3299804630896816935}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.23, y: 0.27, z: 0}
+  m_LocalPosition: {x: 0.88, y: 0.27, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -98,6 +98,10 @@ MonoBehaviour:
   groundLayerMask:
     serializedVersion: 2
     m_Bits: 64
+  peasLayerMask:
+    serializedVersion: 2
+    m_Bits: 128
+  changesWithPeas: 0
 --- !u!1 &4595578241736789933
 GameObject:
   m_ObjectHideFlags: 0
@@ -108,7 +112,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4985140184387510181}
   - component: {fileID: 497804192354311527}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -160,7 +164,7 @@ GameObject:
   - component: {fileID: 1968876747589728661}
   - component: {fileID: 3272505438059481876}
   - component: {fileID: 1742504331719256835}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: BasicPea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -325,8 +329,8 @@ MonoBehaviour:
   points: 5
   movementDirection: {x: 1, y: 0}
   movementSpeed: 2
-  ladderSpeed: 1
-  ladderTarget: {x: 0, y: 0}
   isInGround: 0
   isStuck: 0
   checkIfIsStuck: 0
+  ladderSpeed: 1
+  ladderTarget: {x: 0, y: 0}

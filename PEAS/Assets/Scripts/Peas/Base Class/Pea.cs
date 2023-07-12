@@ -75,6 +75,7 @@ public abstract class Pea : MonoBehaviour, IPea
         }
         transform.localRotation = q;
     }
+    
     public void ChangeState(PeaState s) { state = s; }
     public PeaType GetPeaType() { return type; }
     public ScenarioObjectType GetCollisionType()
@@ -89,17 +90,75 @@ public abstract class Pea : MonoBehaviour, IPea
     {
         throw new System.NotImplementedException();
     }
+    /// <summary>
+    /// Método que indicará como debe caminar este guisante según
+    /// donde se encuentre.
+    /// Si no está siendo afectado por ningún objeto del escenario, se moverá en la branch NONE con su movimiento autónomo.
+    /// Por el contrario, si está siendo afectado por el escenario, se moverá según cómo le afecte el escenario a este tipo de guisante (no tiene por que ser igual para todos)
+    /// </summary>
+    public void Walk()
+    {
+        if (isStuck)
+        {
+            return;
+        }
 
+        if (objectCollision == null)
+        {
+            AutoMovement();
+            return;
+        }
+        switch (objectCollision.type)
+        {
+            case ScenarioObjectType.LADDER:
+                LadderMovement();
+                break;
+            case ScenarioObjectType.ELEVATOR:
+                ElevatorMovement();
+                break;
+            case ScenarioObjectType.TRAMPOLINE:
+                TrampolineMovement();
+                break;
+            case ScenarioObjectType.ICE:
+                IceMovement();
+                break;
+            case ScenarioObjectType.CINTA:
+                CintaMovement();
+                break;
+            //---------------------------------default movement
+            default:
+                AutoMovement();
+                break;
+        }
+    }
+
+    public virtual void EntersScenarioObject(ScenarioObject st)
+    {
+        objectCollision = st;
+        //switch statement here, implemented in inherited class
+    }
+    public virtual void ExitsScenarioObject(ScenarioObject st)
+    {
+        objectCollision = null;
+        st.DeletePea(this);
+        //switch statement here, implemented in inherited class
+
+    }
+    /// <summary>
+    /// El movimiento default comparte (en principio) para todos los guisantes que solo se hace cuando esta en el suelo
+    /// </summary>
+    /// <returns></returns>
+    public virtual bool AutoMovement()
+    {
+        if (isInGround) return true;
+        return false;
+    }
     //---------------------NOT IMPLEMENTED HERE-------------------------------
-    public abstract void Walk();
-    public abstract void EntersScenarioObject(ScenarioObject st);
-    public abstract void ExitsScenarioObject(ScenarioObject st);
-    public abstract void LadderMovement();
-    public abstract void ElevatorMovement();
-    public abstract void TrampolineMovement();
-    public abstract void IceMovement();
-    public abstract void CintaMovement();
-    public abstract void AutoMovement();
+    public abstract bool LadderMovement();
+    public abstract bool ElevatorMovement();
+    public abstract bool TrampolineMovement();
+    public abstract bool IceMovement();
+    public abstract bool CintaMovement();
 
 
 }

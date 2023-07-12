@@ -17,18 +17,18 @@ public interface IPea
     public void ChangeDirection();
     public void ChangeState(PeaState s);
     public abstract float GetPoints();
-    public abstract void Walk();
+    public void Walk();
     public void Die();
     public abstract void EntersScenarioObject(ScenarioObject so);
     public abstract void ExitsScenarioObject(ScenarioObject so);
     //Movement types: metodos por ahora vacios pero en esencia cada guisante deberá implementar su manera
     //de interactuar con el escenario
-    public abstract void LadderMovement();
-    public abstract void ElevatorMovement();
-    public abstract void TrampolineMovement();
-    public abstract void IceMovement();
-    public abstract void CintaMovement();
+    public abstract bool LadderMovement();
+    public abstract bool ElevatorMovement();
+    public abstract bool TrampolineMovement();
+    public abstract bool IceMovement();
+    public abstract bool CintaMovement();
     //Movimiento propio
-    public abstract void AutoMovement();
+    public abstract bool AutoMovement();
 
 }

@@ -7,7 +7,7 @@ public class BasicPea : Pea
 {
     public override void EntersScenarioObject(ScenarioObject so)
     {
-        objectCollision = so;
+        base.EntersScenarioObject(so);
         switch (so.type)
         {
             case ScenarioObjectType.LADDER:
@@ -33,8 +33,7 @@ public class BasicPea : Pea
 
     public override void ExitsScenarioObject(ScenarioObject so)
     {
-        objectCollision = null;
-        so.DeletePea(this);
+        base.ExitsScenarioObject(so);
         switch (so.type)
         {
             case ScenarioObjectType.LADDER:
@@ -58,12 +57,12 @@ public class BasicPea : Pea
         }
     }
 
-    public override void IceMovement()
+    public override bool IceMovement()
     {
-        throw new System.NotImplementedException();
+        return false;
     }
 
-    public override void LadderMovement()
+    public override bool LadderMovement()
     {
         float step = ladderSpeed * Time.deltaTime;
         transform.position = Vector2.MoveTowards(transform.position, ladderTarget, step);
@@ -74,70 +73,30 @@ public class BasicPea : Pea
             // Detiene el movimiento
             ExitsScenarioObject(objectCollision);
         }
-    }
-
-    public override void TrampolineMovement()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    /// <summary>
-    /// Método que indicará como debe caminar este guisante según
-    /// donde se encuentre.
-    /// Si no está siendo afectado por ningún objeto del escenario, se moverá en la branch NONE con su movimiento autónomo.
-    /// Por el contrario, si está siendo afectado por el escenario, se moverá según cómo le afecte el escenario a este tipo de guisante (no tiene por que ser igual para todos)
-    /// </summary>
-    public override void Walk()
-    {
-        if(objectCollision == null)
-        {
-            AutoMovement();
-            return;
-        }
-        switch (objectCollision.type)
-        {
-            case ScenarioObjectType.LADDER:
-                LadderMovement();
-                break;
-            case ScenarioObjectType.ELEVATOR:
-                ElevatorMovement();
-                break;
-            case ScenarioObjectType.TRAMPOLINE:
-                TrampolineMovement();
-                break;
-            case ScenarioObjectType.ICE:
-                IceMovement();
-                break;
-            case ScenarioObjectType.CINTA:
-                CintaMovement();
-                break;
-            //---------------------------------default movement
-            default:
-                AutoMovement();
-                break;
-        }
-
+        return false;
 
     }
-    public override void AutoMovement()
+
+    public override bool TrampolineMovement()
     {
-        if (isInGround && !isStuck)
-        {
-            //movementDirection = movementDirection.normalized;
-            //Vector2 v = movementDirection * movementSpeed;
-            //rb.velocity = v;
+        return false;
+    }
+
+
+    public override bool AutoMovement()
+    {
+        if (base.AutoMovement())
             transform.Translate(movementDirection * movementSpeed * Time.deltaTime);
-        }
-
+        return false;
     }
 
-    public override void CintaMovement()
+    public override bool CintaMovement()
     {
-        throw new System.NotImplementedException();
+        return false;
     }
 
-    public override void ElevatorMovement()
+    public override bool ElevatorMovement()
     {
-        throw new System.NotImplementedException();
+        return false;
     }
 }
