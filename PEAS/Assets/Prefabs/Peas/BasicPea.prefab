@@ -101,7 +101,7 @@ MonoBehaviour:
   peasLayerMask:
     serializedVersion: 2
     m_Bits: 128
-  changesWithPeas: 0
+  changesWithPeas: 1
 --- !u!1 &4595578241736789933
 GameObject:
   m_ObjectHideFlags: 0
