@@ -5,10 +5,10 @@ public enum ScenarioObjectType
 
 public enum PeaType
 {
-    BASIC, KID, OLD, SALARYMAN, CARRIER, DESTROYER, DOG, COUPLE
+    BASIC, KID, OLD, SALARYMAN, CARRIER, DESTROYER, DOG, COUPLE, LASTPEA
 }
 
 public enum PeaState
 {
-    WALK, STOP, QUEUE
+    WALK, STOP, QUEUE, DEAD
 }

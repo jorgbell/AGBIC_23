@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -49,7 +47,6 @@ public abstract class Pea : MonoBehaviour, IPea
     {
         myrrorForces = movementDirection.x;
         rb = GetComponent<Rigidbody2D>(); col = GetComponent<Collider2D>(); sprrender = GetComponent<SpriteRenderer>();
-
     }
     private void FixedUpdate()
     {
@@ -67,6 +64,7 @@ public abstract class Pea : MonoBehaviour, IPea
             Walk();
         }
     }
+
     /// <summary>
     /// Changes movement direction and object rotation
     /// </summary>
@@ -95,7 +93,8 @@ public abstract class Pea : MonoBehaviour, IPea
     public float GetPoints() { return points; }
     public void Die()
     {
-        throw new System.NotImplementedException();
+        state = PeaState.DEAD;
+        gameObject.SetActive(false);
     }
     /// <summary>
     /// Método que indicará como debe caminar este guisante según

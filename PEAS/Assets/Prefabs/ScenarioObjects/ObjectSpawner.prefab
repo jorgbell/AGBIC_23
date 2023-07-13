@@ -100,6 +100,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectToSpawnHere: 0
   ladderPrefab: {fileID: 9223139107614498894, guid: e5fbd688ad6727f49b8400c1d07f0ea4, type: 3}
+  trampolinePrefab: {fileID: 3857086380682165289, guid: cec242a84f20b2547bfbda05aaf35425, type: 3}
 --- !u!70 &4362491484737316631
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
