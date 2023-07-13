@@ -10,7 +10,7 @@ public abstract class Pea : MonoBehaviour, IPea
 {
     //Pea information
     public PeaType type;
-    public float points;
+    public int points;
     private PeaState state;
     protected ScenarioObject objectCollision = null;
 
@@ -90,7 +90,7 @@ public abstract class Pea : MonoBehaviour, IPea
         return objectCollision.type;
     }
 
-    public float GetPoints() { return points; }
+    public int GetPoints() { return points; }
     public void Die()
     {
         state = PeaState.DEAD;

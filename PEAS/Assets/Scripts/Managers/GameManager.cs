@@ -6,7 +6,8 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager _instance { get; private set; }
-    
+    [SerializeField]
+    LevelManager m_LevelManager;
 
     private void Awake()
     {
@@ -18,7 +19,7 @@ public class GameManager : MonoBehaviour
         }
         else if (_instance != this)
         {
-            //_instance.m_roundManager = m_roundManager;
+            _instance.m_LevelManager = m_LevelManager;
             Destroy(gameObject);
         }
         

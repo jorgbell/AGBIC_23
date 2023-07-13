@@ -7,7 +7,7 @@ using UnityEngine.Events;
 public class EventsManager : MonoBehaviour
 {
     public static EventsManager _instance { get; private set; }
-    public UnityEvent<IPea> killPea { get; private set; }
+    public UnityEvent<int> addPoints { get; private set; }
 
     private void Awake()
     {
@@ -28,7 +28,7 @@ public class EventsManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        killPea = new UnityEvent<IPea>();
+        addPoints = new UnityEvent<int>();
     }
 
 }

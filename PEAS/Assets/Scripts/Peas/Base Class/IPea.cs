@@ -16,7 +16,7 @@ public interface IPea
     public ScenarioObjectType GetCollisionType();
     public void ChangeDirection();
     public void ChangeState(PeaState s);
-    public abstract float GetPoints();
+    public abstract int GetPoints();
     public void Walk();
     public void Die();
     public abstract void EntersScenarioObject(ScenarioObject so);

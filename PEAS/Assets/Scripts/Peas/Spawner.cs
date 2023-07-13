@@ -9,22 +9,35 @@ public class Spawner : MonoBehaviour
     [SerializeField]
     float summonFrequency = 3.0f, firstSummonTime = 0;
     // Start is called before the first frame update
+    [SerializeField]
+    SpriteRenderer nextPeaPortraitHolder;
+    GameObject nextPea;
     void Start()
     {
+        SetNextPea();
         InvokeRepeating("SpawnPea", firstSummonTime, summonFrequency);
     }
 
     void SpawnPea()
     {
-        GameObject pea = null;
+        if (nextPea)
+        {
+            nextPea.SetActive(true);
+            nextPea.transform.position = spawnPoint.position;
+        }
+        SetNextPea();
+    }
+    void SetNextPea()
+    {
         //PeaType t = (PeaType)Random.Range(0, (int)PeaType.LASTPEA);
         PeaType t = PeaType.BASIC;
-        pea = PeaPool.Instance.GetPooledObject(t);
-
-        if (pea)
+        nextPea = PeaPool.Instance.GetPooledObject(t);
+        if(nextPea)
         {
-            pea.SetActive(true);
-            pea.transform.position = spawnPoint.position;
+            nextPeaPortraitHolder.sprite = nextPea.gameObject.GetComponent<SpriteRenderer>().sprite;
+            nextPeaPortraitHolder.color = nextPea.gameObject.GetComponent<SpriteRenderer>().color;
         }
+
     }
+
 }

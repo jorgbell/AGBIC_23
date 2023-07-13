@@ -10,7 +10,6 @@ public class Deathzone : MonoBehaviour
         if (colPea != null)
         {
             colPea.Die();
-            EventsManager._instance.killPea.Invoke(colPea);
         }
     }
 
