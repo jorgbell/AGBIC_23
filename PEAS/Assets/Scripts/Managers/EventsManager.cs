@@ -22,13 +22,8 @@ public class EventsManager : MonoBehaviour
             //_instance.m_roundManager = m_roundManager;
             Destroy(gameObject);
         }
-    }
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
         addPoints = new UnityEvent<int>();
     }
+
 
 }

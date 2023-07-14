@@ -5,7 +5,7 @@ using UnityEngine.UIElements;
 
 public class Pod : MonoBehaviour
 {
-    List<IPea> peasInsidePot = new List<IPea>();
+    List<PeaType> peasInsidePot = new List<PeaType>();
     [SerializeField]
     int peasToFill = 5;
 
@@ -15,7 +15,7 @@ public class Pod : MonoBehaviour
         if (colPea != null)
         {
             colPea.Die();
-            peasInsidePot.Add(colPea);
+            peasInsidePot.Add(colPea.GetPeaType());
         }
     }
 
@@ -26,35 +26,31 @@ public class Pod : MonoBehaviour
 
     void ClearPod()
     {
-        //detectar multiplicadores
-        int i = 0; int multiplier = 0; int pointsToAdd = 0; 
-        IPea previousPea = null; IPea actualPea;
-        while (i < peasInsidePot.Count)
+        int pointsToAdd = 0;
+        PeaType previousPea = PeaType.LASTPEA; //inicia sin racha
+        int multiplier = 0; int maxIguales = 0;
+        for (int i = 0; i < peasInsidePot.Count; i++)
         {
-            actualPea = peasInsidePot[i];
-            //si es la primera de la racha o si existe una racha (guisante igual al anterior)
-            if (previousPea == null || actualPea.GetPeaType() == previousPea.GetPeaType())
+            //pillas el tipo actual y comparas con el anterior (ya haya una racha o no)
+            PeaType actualPea = peasInsidePot[i];
+            bool same = (actualPea == previousPea || previousPea == PeaType.LASTPEA);
+            if (same)
             {
-                multiplier += 1;
+                multiplier++;
                 previousPea = actualPea;
             }
-            else
+            //suma puntos en caso de no ser una racha (else del anterior if)
+            //o siempre que sea la ultima de todas
+            if(!same || i == peasInsidePot.Count - 1)
             {
-                //Cada una de las que sean iguales suma su puntuacion x el multiplicador acumulado
-                pointsToAdd = (previousPea.GetPoints() * multiplier) * multiplier;
-                EventsManager._instance.addPoints.Invoke(pointsToAdd);
-                previousPea = null;
-                multiplier = 0;
+                pointsToAdd += DataManager._instance.GetPoints(previousPea) * multiplier * multiplier;
+                maxIguales = multiplier > maxIguales ? multiplier : maxIguales;
+                multiplier = 1;
+                previousPea = PeaType.LASTPEA;
             }
-            i++;
         }
-        if(pointsToAdd == 0)
-        {
-            Debug.Log("Congrats!! Todos son iguales");
-            pointsToAdd = (peasInsidePot[peasToFill-1].GetPoints() * multiplier) * multiplier;
-            EventsManager._instance.addPoints.Invoke(pointsToAdd);
-        }
+        Debug.Log("Mayor racha: " + maxIguales);
+        EventsManager._instance.addPoints.Invoke(pointsToAdd);
         peasInsidePot.Clear();
-
     }
 }
