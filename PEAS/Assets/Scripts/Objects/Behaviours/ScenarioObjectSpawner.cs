@@ -6,7 +6,7 @@ public class ScenarioObjectSpawner : MonoBehaviour
 {
     public ScenarioObjectType objectToSpawnHere;
     ScenarioObject objectSpawned = null;
-    bool isInPosition = false;
+    public bool isInPosition = false;
     public Ladder ladderPrefab;
     public Trampoline trampolinePrefab;
     Collider2D col;
@@ -67,14 +67,15 @@ public class ScenarioObjectSpawner : MonoBehaviour
                 //si ha hecho click mientras esta por encima, comprueba si el objeto estaba colocado o no, para hacer lo opuesto
                 if (!isInPosition)
                 {
-                    isInPosition = true;
-                    objectSpawned.SpawnScenarioObject(transform);
+                    if(LevelManager._instance.GetActiveSpawners(objectToSpawnHere) >= LevelManager._instance.GetMaxObjectsFromType(objectToSpawnHere))
+                    {
+                        LevelManager._instance.DespawnLast(objectToSpawnHere);
+                    }
+                    SpawnThis();
                 }
                 else
                 {
-                    isInPosition = false;
-                    objectSpawned.DeSpawnScenarioObject();
-
+                    DespawnThis();
                 }
             }
         }
@@ -83,4 +84,18 @@ public class ScenarioObjectSpawner : MonoBehaviour
             if (sprRender.enabled == true) sprRender.enabled = false;
         }
     }
+
+
+    public void SpawnThis()
+    {
+        isInPosition = true;
+        objectSpawned.SpawnScenarioObject(transform);
+        LevelManager._instance.SetLastSpawned(this);
+    }
+    public void DespawnThis()
+    {
+        isInPosition = false;
+        objectSpawned.DeSpawnScenarioObject();
+    }
+
 }

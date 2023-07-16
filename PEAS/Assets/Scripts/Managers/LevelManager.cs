@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class LevelManager : MonoBehaviour
 {
@@ -9,6 +10,13 @@ public class LevelManager : MonoBehaviour
     public int maxTime = -1;
     int points;
     int actualTime;
+    [HideInInspector]
+    public int nScenarioObjects = 0;
+    [HideInInspector]
+    public int[] MaxActiveObjectsInLevel = new int[0];
+    public GameObject spawnersHolder;
+    List<List<ScenarioObjectSpawner>> scenarioObjects;
+    int[] lastSpawned;
 
     private void Awake()
     {
@@ -21,6 +29,23 @@ public class LevelManager : MonoBehaviour
         {
             Destroy(this);
         }
+        InitScenarioObjects();
+    }
+
+    void InitScenarioObjects()
+    {
+        scenarioObjects = new List<List<ScenarioObjectSpawner>>();
+        for(int i = 0; i< nScenarioObjects; i++)
+        {
+            scenarioObjects.Add(new List<ScenarioObjectSpawner>());
+        }
+        ScenarioObjectSpawner[] spawners = spawnersHolder.GetComponentsInChildren<ScenarioObjectSpawner>();
+        foreach (ScenarioObjectSpawner s in spawners)
+        {
+            scenarioObjects[(int)s.objectToSpawnHere].Add(s);
+        }
+        lastSpawned = new int[scenarioObjects.Count];
+        for(int i = 0; i< scenarioObjects.Count; i++) { lastSpawned[i] = -1; }
     }
 
     private void Start()
@@ -42,12 +67,36 @@ public class LevelManager : MonoBehaviour
     void DecreaseTime()
     {
         actualTime -= 1;
-        Debug.Log("Remaining: " + actualTime + " s");
+        //Debug.Log("Remaining: " + actualTime + " s");
     }
     void EndLevel()
     {
         Debug.Log("LEVEL ENDED");
     }
 
-
+    public int GetActiveSpawners(ScenarioObjectType type)
+    {
+        int nActives = 0;
+        List<ScenarioObjectSpawner> l = scenarioObjects[(int)type];
+        foreach(ScenarioObjectSpawner s in l)
+        {
+            if (s.isInPosition) nActives++;
+        }
+        return nActives;
+    }
+    public int GetMaxObjectsFromType(ScenarioObjectType type)
+    {
+        return MaxActiveObjectsInLevel[(int)type];
+    }
+    public void SetLastSpawned(ScenarioObjectSpawner spawner)
+    {
+        ScenarioObjectType t = spawner.objectToSpawnHere;
+        int index = scenarioObjects[(int)t].IndexOf(spawner);
+        if (index >= 0) lastSpawned[(int)t] = index;
+    }
+    public void DespawnLast(ScenarioObjectType type)
+    {
+        if (lastSpawned[(int)type] >= 0)
+            scenarioObjects[(int)type][lastSpawned[(int)type]].DespawnThis();
+    }
 }
