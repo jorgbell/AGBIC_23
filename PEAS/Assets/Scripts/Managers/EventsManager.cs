@@ -8,6 +8,8 @@ public class EventsManager : MonoBehaviour
 {
     public static EventsManager _instance { get; private set; }
     public UnityEvent<int> addPoints { get; private set; }
+    public UnityEvent<int> changeTime{ get; private set; }
+    public UnityEvent scenarioObjectChanged{ get; private set; }
 
     private void Awake()
     {
@@ -23,6 +25,8 @@ public class EventsManager : MonoBehaviour
             Destroy(gameObject);
         }
         addPoints = new UnityEvent<int>();
+        changeTime = new UnityEvent<int>();
+        scenarioObjectChanged = new UnityEvent();
     }
 
 

@@ -15,7 +15,8 @@ public class LevelManager : MonoBehaviour
     [HideInInspector]
     public int[] MaxActiveObjectsInLevel = new int[0];
     public GameObject spawnersHolder;
-    List<List<ScenarioObjectSpawner>> scenarioObjects;
+    [HideInInspector]
+    public List<List<ScenarioObjectSpawner>> scenarioObjects;
     int[] lastSpawned;
 
     private void Awake()
@@ -54,20 +55,24 @@ public class LevelManager : MonoBehaviour
         if (maxTime > 0)
         {
             actualTime = maxTime;
+            EventsManager._instance.changeTime.Invoke(actualTime);
             Invoke("EndLevel", maxTime);
             InvokeRepeating("DecreaseTime", 0, 1);
+        }
+        else
+        {
+            EventsManager._instance.changeTime.Invoke(int.MaxValue);
         }
     }
 
     void AddPoints(int p)
     {
         points += p; 
-        Debug.Log(points);
     }
     void DecreaseTime()
     {
         actualTime -= 1;
-        //Debug.Log("Remaining: " + actualTime + " s");
+        EventsManager._instance.changeTime.Invoke(actualTime);
     }
     void EndLevel()
     {
@@ -83,6 +88,10 @@ public class LevelManager : MonoBehaviour
             if (s.isInPosition) nActives++;
         }
         return nActives;
+    }
+    public int GetInactiveSpawners(ScenarioObjectType type)
+    {
+        return MaxActiveObjectsInLevel[(int)type] - GetActiveSpawners(type);
     }
     public int GetMaxObjectsFromType(ScenarioObjectType type)
     {

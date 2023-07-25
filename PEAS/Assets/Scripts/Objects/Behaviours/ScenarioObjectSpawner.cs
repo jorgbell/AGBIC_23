@@ -77,6 +77,7 @@ public class ScenarioObjectSpawner : MonoBehaviour
                 {
                     DespawnThis();
                 }
+                EventsManager._instance.scenarioObjectChanged.Invoke();
             }
         }
         else
