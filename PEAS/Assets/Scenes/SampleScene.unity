@@ -6108,7 +6108,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3710693901892700784, guid: ea6b9a8e030eb5542a57a6040b49a28a, type: 3}
       propertyPath: maxTime
-      value: 300
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3710693901892700784, guid: ea6b9a8e030eb5542a57a6040b49a28a, type: 3}
       propertyPath: spawnersHolder

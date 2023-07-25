@@ -76,7 +76,7 @@ public class LevelManager : MonoBehaviour
     }
     void EndLevel()
     {
-        Debug.Log("LEVEL ENDED");
+        GameManager._instance.ChangeScene("FinishScene");
     }
 
     public int GetActiveSpawners(ScenarioObjectType type)

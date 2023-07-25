@@ -14,17 +14,29 @@ public class TitleUI : MonoBehaviour
     [SerializeField]
     Button optionsButton;
 
+    [SerializeField]
+    GameObject creditsGameUI, mainGameUI;
+    public void Play()
+    {
+        GameManager._instance.ChangeScene("SampleScene");
+    }
     public void Options()
     {
         Debug.Log("change to options menu");
     }
     public void Credits()
     {
-        Debug.Log("Change to credits menu");
+        creditsGameUI.SetActive(true);
+        mainGameUI.SetActive(false);
     }
     public void Exit()
     {
         GameManager._instance.Exit();
+    }
+    public void GoToMain()
+    {
+        mainGameUI.SetActive(true);
+        creditsGameUI.SetActive(false);
     }
 
 }
