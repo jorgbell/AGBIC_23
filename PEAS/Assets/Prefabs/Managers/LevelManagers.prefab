@@ -121,6 +121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c67a575e7a24124295bae67e7310426, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onEnter: 0
 --- !u!1 &5441527676492486749
 GameObject:
   m_ObjectHideFlags: 0
@@ -155,7 +156,7 @@ Transform:
   - {fileID: 1618470116313091552}
   - {fileID: 9039709841391844701}
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3710693901892700784
 MonoBehaviour:
@@ -171,6 +172,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   level_ID: 0
   maxTime: -1
+  nScenarioObjects: 8
+  MaxActiveObjectsInLevel: 0000000000000000000000000000000000000000000000000000000000000000
+  spawnersHolder: {fileID: 0}
 --- !u!114 &6765744256217580234
 MonoBehaviour:
   m_ObjectHideFlags: 0
