@@ -26,7 +26,10 @@ public class GameManager : MonoBehaviour
         }
         
     }
-
+    private void Start()
+    {
+        AudioManager.instance.Play("testbgm");
+    }
     public void ChangeScene(string sceneName)
     {
         StartCoroutine(LoadSceneAsync(sceneName));
