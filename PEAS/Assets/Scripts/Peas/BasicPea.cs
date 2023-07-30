@@ -95,7 +95,7 @@ public class BasicPea : Pea
     {
         if (base.AutoMovement())
         {
-            transform.Translate(movementDirection * movementSpeed * Time.deltaTime);
+            transform.Translate(Vector3.right * movementSpeed * Time.deltaTime);
             return true;
         }
         return false;

@@ -31,7 +31,7 @@ public class ChangeDirection : MonoBehaviour
             (changesWithPeas && Physics2D.BoxCast(transform.position, wallBoxSize, 0, transform.right, maxWallDistance, peasLayerMask)))
         {
             //Debug.Log("COLLIDES WITH WALL(TER)");
-            thisPea.ChangeDirection();
+            thisPea.RotateMovement();
             return true;
         }
         return false;

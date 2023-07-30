@@ -34,6 +34,8 @@ public class Spawner : MonoBehaviour
         nextPea = PeaPool.Instance.GetPooledObject(t);
         if(nextPea)
         {
+            IPea pea = nextPea.GetComponent(typeof(IPea)) as IPea;
+            pea.SetMovementDirection(transform.eulerAngles);
             nextPeaPortraitHolder.sprite = nextPea.gameObject.GetComponent<SpriteRenderer>().sprite;
             nextPeaPortraitHolder.color = nextPea.gameObject.GetComponent<SpriteRenderer>().color;
         }

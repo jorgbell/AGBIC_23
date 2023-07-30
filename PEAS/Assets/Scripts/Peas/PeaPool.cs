@@ -71,11 +71,6 @@ public class PeaPool : MonoBehaviour
 
     }
 
-    void Start()
-    {
-        
-    }
-
     public GameObject GetPooledObject(PeaType p)
     {
         foreach(GameObject go in pooledObjects[(int)p])

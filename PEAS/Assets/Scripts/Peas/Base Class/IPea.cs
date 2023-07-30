@@ -1,3 +1,5 @@
+
+using UnityEngine;
 /// <summary>
 /// Interfaz que contiene todos los elementos comunes de las cosas que deben hacer los guisantes, sean del tipo que sean:
 /// - Método para caminar
@@ -9,12 +11,12 @@
 /// - Interaccion con los objetos del escenario
 /// - etc
 /// </summary>
-
 public interface IPea
 {
     public PeaType GetPeaType();
     public ScenarioObjectType GetCollisionType();
-    public void ChangeDirection();
+    public void RotateMovement();
+    public void SetMovementDirection(Vector3 initialRotation);
     public void ChangeState(PeaState s);
     public abstract int GetPoints();
     public void Walk();

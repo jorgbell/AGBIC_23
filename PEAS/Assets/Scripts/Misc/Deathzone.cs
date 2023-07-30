@@ -22,7 +22,7 @@ public class Deathzone : MonoBehaviour
     void Die(Collider2D collision)
     {
         IPea colPea = collision.gameObject.GetComponent(typeof(IPea)) as IPea;
-        if (colPea != null)
+        if (colPea != null && collision.enabled)
         {
             colPea.Die();
         }

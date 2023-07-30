@@ -15,8 +15,7 @@ public abstract class Pea : MonoBehaviour, IPea
     protected ScenarioObject objectCollision = null;
 
     //Movement
-    public Vector2 movementDirection;
-    protected float myrrorForces;
+    protected float myrrorForces = 1;
     public float movementSpeed;
     //Movement Logic
     [HideInInspector]
@@ -45,7 +44,6 @@ public abstract class Pea : MonoBehaviour, IPea
 
     private void Start()
     {
-        myrrorForces = movementDirection.x;
         rb = GetComponent<Rigidbody2D>(); col = GetComponent<Collider2D>(); sprrender = GetComponent<SpriteRenderer>();
     }
     private void FixedUpdate()
@@ -68,7 +66,7 @@ public abstract class Pea : MonoBehaviour, IPea
     /// <summary>
     /// Changes movement direction and object rotation
     /// </summary>
-    public void ChangeDirection()
+    public void RotateMovement()
     {
         Vector3 currentRotation = transform.localRotation.eulerAngles;
         Quaternion q = Quaternion.identity;
@@ -79,6 +77,12 @@ public abstract class Pea : MonoBehaviour, IPea
             myrrorForces *= -1;
         }
         transform.localRotation = q;
+    }
+    public void SetMovementDirection(Vector3 initialRotation)
+    {        
+        transform.localRotation = Quaternion.Euler(initialRotation);
+        if (initialRotation.y == 180) myrrorForces = -1;
+        else myrrorForces = 1;
     }
 
     public void ChangeState(PeaState s) { state = s; }
