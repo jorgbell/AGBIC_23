@@ -10,8 +10,7 @@ public abstract class Pea : MonoBehaviour, IPea
 {
     //Pea information
     public PeaType type;
-    public int points;
-    private PeaState state;
+    protected PeaState state;
     protected ScenarioObject objectCollision = null;
 
     //Movement
@@ -24,6 +23,8 @@ public abstract class Pea : MonoBehaviour, IPea
     public volatile bool isStuck = false;
     [HideInInspector]
     public volatile bool checkIfIsStuck = false;
+    [SerializeField]
+    protected ChangeDirection directionTrigger;
 
     //ScenarioObjects related data
     /// <summary>
@@ -42,7 +43,7 @@ public abstract class Pea : MonoBehaviour, IPea
 
     protected Rigidbody2D rb; protected Collider2D col; protected SpriteRenderer sprrender;
 
-    private void Start()
+    private void Awake()
     {
         rb = GetComponent<Rigidbody2D>(); col = GetComponent<Collider2D>(); sprrender = GetComponent<SpriteRenderer>();
     }
@@ -79,7 +80,7 @@ public abstract class Pea : MonoBehaviour, IPea
         transform.localRotation = q;
     }
     public void SetMovementDirection(Vector3 initialRotation)
-    {        
+    {
         transform.localRotation = Quaternion.Euler(initialRotation);
         if (initialRotation.y == 180) myrrorForces = -1;
         else myrrorForces = 1;
@@ -94,7 +95,6 @@ public abstract class Pea : MonoBehaviour, IPea
         return objectCollision.type;
     }
 
-    public int GetPoints() { return points; }
     public void Die()
     {
         state = PeaState.DEAD;
@@ -106,10 +106,14 @@ public abstract class Pea : MonoBehaviour, IPea
     /// Si no está siendo afectado por ningún objeto del escenario, se moverá en la branch NONE con su movimiento autónomo.
     /// Por el contrario, si está siendo afectado por el escenario, se moverá según cómo le afecte el escenario a este tipo de guisante (no tiene por que ser igual para todos)
     /// </summary>
-    public void Walk()
+    public virtual void Walk()
     {
         //casos base
         if (isStuck)
+        {
+            return;
+        }
+        if (state == PeaState.STOP)
         {
             return;
         }
@@ -179,5 +183,8 @@ public abstract class Pea : MonoBehaviour, IPea
     public abstract bool IceMovement();
     public abstract bool CintaMovement();
 
-
+    public PeaState GetState()
+    {
+        return state;
+    }
 }

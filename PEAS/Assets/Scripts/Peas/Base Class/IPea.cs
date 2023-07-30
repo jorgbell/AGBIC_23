@@ -18,8 +18,8 @@ public interface IPea
     public void RotateMovement();
     public void SetMovementDirection(Vector3 initialRotation);
     public void ChangeState(PeaState s);
-    public abstract int GetPoints();
-    public void Walk();
+    public PeaState GetState();
+    public abstract void Walk();
     public void Die();
     public abstract void EntersScenarioObject(ScenarioObject so);
     public abstract void ExitsScenarioObject(ScenarioObject so);

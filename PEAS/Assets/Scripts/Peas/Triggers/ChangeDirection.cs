@@ -27,13 +27,22 @@ public class ChangeDirection : MonoBehaviour
             //Debug.Log("CANT CHECK WALL COLLISION");
             return false;
         }
-        if (Physics2D.BoxCast(transform.position, wallBoxSize, 0, transform.right, maxWallDistance, groundLayerMask) ||
-            (changesWithPeas && Physics2D.BoxCast(transform.position, wallBoxSize, 0, transform.right, maxWallDistance, peasLayerMask)))
+        var ground = Physics2D.BoxCast(transform.position, wallBoxSize, 0, transform.right, maxWallDistance, groundLayerMask);
+        if (ground) {
+            thisPea.RotateMovement();
+            return true;
+        }        
+        var pea = Physics2D.BoxCast(transform.position, wallBoxSize, 0, transform.right, maxWallDistance, peasLayerMask);
+        //si colisiona con un guisante, este guisante rebotará si:
+        //-tiene que rebotar siempre que choque con un guisante
+        //el guisante con el que rebote esta generando un bloqueo
+        if(pea && changesWithPeas ||
+            pea && pea.transform.gameObject.GetComponent<Pea>().GetState()== PeaState.STOP)
         {
-            //Debug.Log("COLLIDES WITH WALL(TER)");
             thisPea.RotateMovement();
             return true;
         }
+        
         return false;
     }
     private void OnDrawGizmos()

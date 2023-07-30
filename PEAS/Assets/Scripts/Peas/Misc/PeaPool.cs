@@ -8,7 +8,10 @@ public class PeaPool : MonoBehaviour
     public static PeaPool Instance;
     //[HideInInspector]
     public List<List<GameObject>> pooledObjects;
-    public BasicPea basicPeaPrefab;
+    [SerializeField]
+    BasicPea basicPeaPrefab;
+    [SerializeField]
+    OldPea oldPeaPrefab;
     public int amountToPool;
 
     void Awake()
@@ -38,7 +41,7 @@ public class PeaPool : MonoBehaviour
                     Debug.LogWarning("KID NOT CREATED YET");
                     break;
                 case PeaType.OLD:
-                    Debug.LogWarning("OLD NOT CREATED YET");
+                    peaPrefab = oldPeaPrefab.gameObject;
                     break;
                 case PeaType.SALARYMAN:
                     Debug.LogWarning("SALARYMAN NOT CREATED YET");

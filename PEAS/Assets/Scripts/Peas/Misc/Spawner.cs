@@ -30,7 +30,8 @@ public class Spawner : MonoBehaviour
     void SetNextPea()
     {
         //PeaType t = (PeaType)Random.Range(0, (int)PeaType.LASTPEA);
-        PeaType t = PeaType.BASIC;
+        PeaType t = Random.Range(0, 2) == 0 ? PeaType.BASIC : PeaType.OLD;
+        Debug.Log(t);
         nextPea = PeaPool.Instance.GetPooledObject(t);
         if(nextPea)
         {

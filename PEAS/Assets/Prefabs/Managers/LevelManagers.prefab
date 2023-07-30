@@ -188,6 +188,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   basicPeaPrefab: {fileID: 1742504331719256835, guid: ae6e8644b969f2d49be11b3b5b803f83, type: 3}
+  oldPeaPrefab: {fileID: 6381794953810678097, guid: 081e2d5fa072f8b45bad22bbf8bce9e2, type: 3}
   amountToPool: 3
 --- !u!1 &7568778577797344742
 GameObject:

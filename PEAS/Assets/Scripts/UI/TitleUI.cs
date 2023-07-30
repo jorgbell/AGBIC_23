@@ -5,20 +5,12 @@ using UnityEngine.UI;
 
 public class TitleUI : MonoBehaviour
 {
-    [SerializeField]
-    Button playButton;
-    [SerializeField]
-    Button creditsButton;
-    [SerializeField]
-    Button exitButton;
-    [SerializeField]
-    Button optionsButton;
 
     [SerializeField]
     GameObject creditsGameUI, mainGameUI;
     public void Play()
     {
-        GameManager._instance.ChangeScene("SampleScene");
+        GameManager._instance.ChangeScene("TestLevel");
     }
     public void Options()
     {
