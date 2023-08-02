@@ -15,6 +15,8 @@ public class BasicPea : Pea
                 movesInUpdate = true;
                 break;
             case ScenarioObjectType.ELEVATOR:
+                rb.isKinematic = true; rb.velocity = new Vector2(0, 0);
+                movesInUpdate = true;
                 break;
             case ScenarioObjectType.TRAMPOLINE:
                 rb.velocity = new Vector2(0, 0);
@@ -44,6 +46,8 @@ public class BasicPea : Pea
                 movesInUpdate = true;
                 break;
             case ScenarioObjectType.ELEVATOR:
+                rb.isKinematic = false;
+                movesInUpdate = true;
                 break;
             case ScenarioObjectType.TRAMPOLINE:
                 hasJumped = false;
@@ -81,6 +85,19 @@ public class BasicPea : Pea
         return true;
 
     }
+    public override bool ElevatorMovement()
+    {
+        float step = elevatorSpeed * Time.deltaTime;
+        transform.position = Vector2.MoveTowards(transform.position, ladderTarget, step);
+
+        // Comprueba si ha llegado al punto final
+        if (Vector2.Distance(transform.position, ladderTarget) < 0.001f)
+        {
+            // Detiene el movimiento
+            return false;
+        }
+        return true;
+    }
 
     public override bool TrampolineMovement()
     {
@@ -106,8 +123,5 @@ public class BasicPea : Pea
         return true;
     }
 
-    public override bool ElevatorMovement()
-    {
-        return true;
-    }
+    
 }

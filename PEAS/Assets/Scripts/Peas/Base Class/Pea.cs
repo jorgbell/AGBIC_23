@@ -36,6 +36,8 @@ public abstract class Pea : MonoBehaviour, IPea
     public float ladderSpeed;
     [HideInInspector]
     public Vector2 ladderTarget;
+    //ELEVATOR
+    public float elevatorSpeed;
     //TRAMPOLINE
     public float trampolineForceX;
     public float trampolineForceY;

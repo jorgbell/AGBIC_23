@@ -23,15 +23,15 @@ public class OldPea : Pea
     void TryRest()
     {
         float rand = UnityEngine.Random.Range(0, 100) / 100.0f;
-        Debug.Log(rand);
+        //Debug.Log(rand);
         if(rand <= restWalkingProbability)
         {
             Rest();
-            Debug.Log("old pea is tired, resting");
+            //Debug.Log("old pea is tired, resting");
         }
         else
         {
-            Debug.Log("old pea still on fire!");
+            //Debug.Log("old pea still on fire!");
         }
         tryingToRest = false;
     }
@@ -62,6 +62,8 @@ public class OldPea : Pea
                 movesInUpdate = true;
                 break;
             case ScenarioObjectType.ELEVATOR:
+                rb.isKinematic = true; rb.velocity = new Vector2(0, 0);
+                movesInUpdate = true;
                 break;
             case ScenarioObjectType.TRAMPOLINE:
                 rb.velocity = new Vector2(0, 0);
@@ -92,6 +94,8 @@ public class OldPea : Pea
                 movesInUpdate = true;
                 break;
             case ScenarioObjectType.ELEVATOR:
+                rb.isKinematic = false;
+                movesInUpdate = true;
                 break;
             case ScenarioObjectType.TRAMPOLINE:
                 hasJumped = false;
@@ -158,6 +162,15 @@ public class OldPea : Pea
 
     public override bool ElevatorMovement()
     {
+        float step = elevatorSpeed * Time.deltaTime;
+        transform.position = Vector2.MoveTowards(transform.position, ladderTarget, step);
+
+        // Comprueba si ha llegado al punto final
+        if (Vector2.Distance(transform.position, ladderTarget) < 0.001f)
+        {
+            // Detiene el movimiento
+            return false;
+        }
         return true;
     }
 }

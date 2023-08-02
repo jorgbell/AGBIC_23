@@ -29,11 +29,10 @@ public class Spawner : MonoBehaviour
     }
     void SetNextPea()
     {
-        //PeaType t = (PeaType)Random.Range(0, (int)PeaType.LASTPEA);
-        PeaType t = Random.Range(0, 2) == 0 ? PeaType.BASIC : PeaType.OLD;
-        Debug.Log(t);
+        PeaType t = (PeaType)Random.Range(0, (int)PeaType.LASTPEA);
         nextPea = PeaPool.Instance.GetPooledObject(t);
-        if(nextPea)
+
+        if (nextPea)
         {
             IPea pea = nextPea.GetComponent(typeof(IPea)) as IPea;
             pea.SetMovementDirection(transform.eulerAngles);

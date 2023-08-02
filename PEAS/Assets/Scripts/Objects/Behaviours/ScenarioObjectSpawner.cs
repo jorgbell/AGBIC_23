@@ -9,6 +9,7 @@ public class ScenarioObjectSpawner : MonoBehaviour
     public bool isInPosition = false;
     public Ladder ladderPrefab;
     public Trampoline trampolinePrefab;
+    public Elevator elevatorPrefab;
     Collider2D col;
     SpriteRenderer sprRender;
     private void Start()
@@ -26,7 +27,8 @@ public class ScenarioObjectSpawner : MonoBehaviour
                 objectSpawned = Instantiate(ladderPrefab, new Vector3(800, 800, 800), Quaternion.identity);
                 break;
             case ScenarioObjectType.ELEVATOR:
-                Debug.LogWarning("ELEVATOR NOT IMPLEMENTED");
+                sprRender.sprite = elevatorPrefab.GetComponent<SpriteRenderer>().sprite;
+                objectSpawned = Instantiate(elevatorPrefab, new Vector3(800, 800, 800), Quaternion.identity); 
                 break;
             case ScenarioObjectType.TRAMPOLINE:
                 sprRender.sprite = trampolinePrefab.GetComponent<SpriteRenderer>().sprite;

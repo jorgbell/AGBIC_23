@@ -11262,6 +11262,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6788003796997169632, guid: ad03116ee4967d64d832b4f27e1b441b, type: 3}
+      propertyPath: objectToSpawnHere
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7432359100912801020, guid: ad03116ee4967d64d832b4f27e1b441b, type: 3}
       propertyPath: m_Name
       value: ObjectSpawner
@@ -11312,6 +11316,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1306288278}
     m_Modifications:
+    - target: {fileID: 1466083283661831300, guid: 7aab2ae38c9f30241a034bad8beec9c2, type: 3}
+      propertyPath: summonFrequency
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2981077211860282471, guid: 7aab2ae38c9f30241a034bad8beec9c2, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -12082,7 +12090,27 @@ PrefabInstance:
       value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 3710693901892700784, guid: ea6b9a8e030eb5542a57a6040b49a28a, type: 3}
+      propertyPath: MaxActiveObjectsInLevel.Array.data[1]
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 3710693901892700784, guid: ea6b9a8e030eb5542a57a6040b49a28a, type: 3}
       propertyPath: MaxActiveObjectsInLevel.Array.data[2]
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 3710693901892700784, guid: ea6b9a8e030eb5542a57a6040b49a28a, type: 3}
+      propertyPath: MaxActiveObjectsInLevel.Array.data[3]
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 3710693901892700784, guid: ea6b9a8e030eb5542a57a6040b49a28a, type: 3}
+      propertyPath: MaxActiveObjectsInLevel.Array.data[4]
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 3710693901892700784, guid: ea6b9a8e030eb5542a57a6040b49a28a, type: 3}
+      propertyPath: MaxActiveObjectsInLevel.Array.data[5]
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 3710693901892700784, guid: ea6b9a8e030eb5542a57a6040b49a28a, type: 3}
+      propertyPath: MaxActiveObjectsInLevel.Array.data[6]
       value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 4273289163020044185, guid: ea6b9a8e030eb5542a57a6040b49a28a, type: 3}

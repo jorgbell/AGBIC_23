@@ -12,6 +12,8 @@ public class PeaPool : MonoBehaviour
     BasicPea basicPeaPrefab;
     [SerializeField]
     OldPea oldPeaPrefab;
+    [SerializeField]
+    Salaryman salarymanPrefab;
     public int amountToPool;
 
     void Awake()
@@ -44,7 +46,7 @@ public class PeaPool : MonoBehaviour
                     peaPrefab = oldPeaPrefab.gameObject;
                     break;
                 case PeaType.SALARYMAN:
-                    Debug.LogWarning("SALARYMAN NOT CREATED YET");
+                    peaPrefab = salarymanPrefab.gameObject;
                     break;
                 case PeaType.CARRIER:
                     Debug.LogWarning("CARRIER NOT CREATED YET");

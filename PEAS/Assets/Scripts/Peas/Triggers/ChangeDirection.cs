@@ -11,6 +11,7 @@ public class ChangeDirection : MonoBehaviour
     public LayerMask groundLayerMask;
     public LayerMask peasLayerMask;
     public bool changesWithPeas = false;
+    public bool doQueue = true;
 
     private void Start()
     {
@@ -35,12 +36,15 @@ public class ChangeDirection : MonoBehaviour
         var pea = Physics2D.BoxCast(transform.position, wallBoxSize, 0, transform.right, maxWallDistance, peasLayerMask);
         //si colisiona con un guisante, este guisante rebotará si:
         //-tiene que rebotar siempre que choque con un guisante
-        //el guisante con el que rebote esta generando un bloqueo
-        if(pea && changesWithPeas ||
-            pea && pea.transform.gameObject.GetComponent<Pea>().GetState()== PeaState.STOP)
+        //el guisante con el que rebote esta generando un bloqueo (en caso de que no se salte las colas)
+        if (pea)
         {
-            thisPea.RotateMovement();
-            return true;
+            if(changesWithPeas ||
+                doQueue && pea.transform.gameObject.GetComponent<Pea>().GetState() == PeaState.STOP)
+            {
+                thisPea.RotateMovement();
+                return true;
+            }
         }
         
         return false;
